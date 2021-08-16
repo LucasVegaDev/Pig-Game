@@ -1,10 +1,11 @@
-let answerYesBtn, answerNoBtn, btnRules, activePlayer, currentScore, totalScore,  btnRoll, btnHold, firstScore, secondScore, firstCurrent, secondCurrent;
+let answerYesBtn, rulesBox, answerNoBtn, btnRules, activePlayer, currentScore, totalScore,  btnRoll, btnHold, firstScore, secondScore, firstCurrent, secondCurrent;
 
 activePlayer = 0;
 currentScore = 0;
 scores = [0, 0];
-document.querySelector('.rules').classList.add('no-display')
-document.querySelector('.btn--another-round').classList.add('hidden')
+
+
+document.querySelector('.btn--another-round').classList.add('full-hidden')
 
 // Create these functions in order to NOT repeat myself!
 function nextPlayer () {
@@ -20,8 +21,9 @@ function isTheWinner() {
         document.querySelector('.player--' + activePlayer + '-panel').classList.remove('active')
         
         setTimeout( () => {
-            document.querySelector('main').classList.add('main-hidden')
+            document.querySelector('main').classList.add('hidden')
             document.querySelector('.btn--another-round').classList.remove('hidden')
+            document.querySelector('.btn--another-round').classList.remove('full-hidden')
             document.querySelector('.btn--another-round').classList.add('show')
         }, 2000);
     } 
@@ -40,14 +42,11 @@ function gameRestart (){
 
 }
 function playAgain () {
-    document.getElementById('name--0').textContent = 'PLAYER 1'
-    document.getElementById('name--1').textContent = 'PLAYER 2'
-    document.querySelector('main').classList.remove('main-hidden')
+    document.querySelector('main').classList.remove('hidden')
     document.querySelector('main').classList.add('show')
     document.querySelector('.btn--another-round').classList.remove('show')
     document.querySelector('.btn--another-round').classList.add('hidden')
 }
-
 
 answerYesBtn = document.querySelector('.yes');
 answerNoBtn = document.querySelector('no');
@@ -55,22 +54,10 @@ answerNoBtn = document.querySelector('no');
 // BUTTON | When there's a winner, the user decides if he/she wants to keep playing
 answerYesBtn.addEventListener('click', () => {
     // If the user wants to play again 
-    playAgain ()
+    playAgain()
     gameRestart()
+    isTheWinner()
 })
-
-// Rules Button Event
-btnRules = document.querySelector('.rules');
-btnRules.addEventListener('click', () => {
-// Use to display the rules box
-
-btnRules.classList.add('show')
-
-
-
-// gameRestart ()
-})
-
 // Roll Dice Button Events
 btnRoll = document.querySelector('.btn--roll');
 btnRoll.addEventListener('click', () => {
